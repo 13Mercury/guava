@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block title %} Guava {% endblock%}
+{% block content %}
+
+
+  <!-- About Section -->
+  <section id="about" class="content-section text-center bg-light">
+    <div id="fh5co-contact">
+      <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="team-section-grid animate-box fadeInUp animated" style="background-position: center;background-image: url({{user.image.url}});">
+                <div class="overlay-section">
+                  <a id="newInfo" data-toggle="modal" data-target="#meModal" href="/info/{{user.pk}}"><i class="fa fa-pencil fa-3x fa-fw"></i></a>
+                <a id="photo" data-toggle="modal" data-target="#meModal" href="/photo/{{user.pk}}"><i class="fa fa-photo fa-3x fa-fw"></i></a>
+
+                  <div class="desc">
+                    <h3>{{user.nombre}}</h3>
+                      <p>{{user.descripcion}}</p>
+                    <ul class="contact-info">
+                        <li><i class="fa fa-map-marker fa-1x fa-fw"></i>{{user.direccion}}</li>
+                      <li><i class="fa fa-phone fa-1x fa-fw"></i>{{user.telefono}}</li>
+                      <li><i class="fa fa-envelope-o fa-1x fa-fw"></i><a href="#">{{user.email}}</a></li>
+                        <li><i class="fa fa-globe fa-1x fa-fw"></i><a href="{{user.pagina}}">{{user.pagina}}</a></li>
+
+                      <li><i class="fa fa-tree fa-1x fa-fw"></i> {{user.arboles}} <a data-toggle="modal" data-target="#meModal" href="/trees/{{user.pk}}">  <i class="fa fa-plus fa-1x fa-fw"></i></a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+<div class="col-md-6 padds">
+              <div id="map">
+
+              </div>
+            </div>
+          </div>
+          <div class="row"><a class="btn btn-primary" id="newArea" data-toggle="modal" data-target="#newModal"  href="/newArea/{{user.pk}}">Crear Area verde</a></div>
+      </div>
+    </div>
+    </section>
+
+
+  <input id="controlMap" type="hidden" name="controlMap" value="areas">
+  <ul id="ul" hidden >
+    {% for i in ob%}
+    <li class="todas"><p>{{i.ubicacion}}</p>
+    <p>{{i.pk}}</p>
+    <p>{{i.nombre}}</p></li></li>
+    {% endfor %}
+    {% for i in se%}
+    <li class="si"><p>{{i.ubicacion}}</p>
+    <p>{{i.pk}}</p>
+    <p>{{i.nombre}}</p></li></li>
+    {% endfor %}
+  </ul>
+{% endblock %}

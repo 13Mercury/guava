@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block title %} Guava {% endblock%}
+{% block content %}
+
+
+  <!-- About Section -->
+  <section id="about" class="content-section features-icons ffff bg-light text-center">
+    <div id="fh5co-contact">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="foto team-section-grid animate-box fadeInUp animated" style="background-position: center;background-image: url({%static '/img/green.jpg'%});;">
+              <div class="overlay-section">
+                <div class="desc">
+                    <h3>{{ob.nombre}}</h3>
+                          <p>{{ob.direccion}}</p>
+                        <ul class="contact-info">
+                          <li><i class="fa fa-user fa-1x fa-fw"></i>{{ob.creador}}</li>
+                          <li><i class="fa fa-user-o fa-1x fa-fw"></i>{{ob.encargado}}</li>
+                        </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div id="map">
+
+            </div>
+          </div>
+
+          </div>
+          <div class="row">
+            <!--<div class="col-md-4 animate-box">
+              <h3>Adopciones</h3>
+              {% for o in ad %}
+              <li class="text-primary">{{o.creadaPor}},{{o.hechaPor}},{{o.fechaCreacion}},{{o.fechaAdopcion}}</li>
+              {% endfor%}
+            </div>
+            <div class="col-md-4 animate-box">
+              <h3>Aportaciones</h3>
+              {% for o in ap %}
+              <li class="text-success">{{o.hechaPor}},{{o.respondiendoPeticion}},{{o.aportacion}},{{o.comentario}}</li>
+              {% endfor%}
+            </div>
+          -->
+            <div class="col-lg-12 animate-box ffff">
+              <div class="card pet bg-success mb-3" style="width: 20rem;">
+              <div class="card-header  text-white">
+                Peticiones
+              </div>
+              <ul class="list-group list-group-flush">
+
+                {% for o in pt %}
+                <li class="list-group-item">{{o.hechaPor}} dice: {{o.comentario}}
+                  {% if ob.encargado != user and user != "" %}
+                    <a  data-toggle="modal" data-target="#meModal"  href="/areas/aportacion/{{user.pk}}/{{ob.pk}}/{{o.pk}}"><i class="fa fa-plus fa-1x fa-fw"></i></a>
+                  {% endif %}
+                </li>
+                {% endfor%}
+              </ul>
+            </div>
+            </div>
+          </div>
+          <div class="row">
+            {% for o in ft %}
+            <div class="col-lg-3 col-md-6  animate-box">
+              <div class="foto team-section-grid animate-box fadeInUp animated" style="background-image: url({{o.image.url}});">
+                <div class="overlay-section">
+                  <div class="desc">
+                    <h3>{{o.subidaPor}}</h3>
+                      <p>{{o.fechaPublicacion}}</p>
+                    </div>
+                </div>
+              </div>
+            </div>
+            {% endfor%}
+          </div>
+          <div class="row">
+
+            {% if user and not user.is_anonymous %}
+            <a class="btn btn-primary" data-toggle="modal" data-target="#meModal"  href="/areas/foto/{{user.pk}}/{{ob.pk}}"><i class="fa fa-photo fa-1x fa-fw"></i>Foto</a>
+            {% endif %}
+          </div>
+          <div class="row">
+          {% if ob.encargado == user %}
+            <a class="btn btn-primary" data-toggle="modal" data-target="#meModal"  href="/areas/peticion/{{user.pk}}/{{ob.pk}}">Hacer peticion</a>
+            {% if ob.enAdopcion == "" %}
+
+            <a class="btn btn-primary" href="/poner/{{user.pk}}/{{ob.pk}}">Poner en adopcion</a>
+            {% elif ob.enAdopcion != "" %}
+            <a class="btn btn-primary" href="/quitar/{{user.pk}}/{{ob.pk}}">Anular adopcion</a>
+            {% endif %}
+          {% else %}
+            {% if ob.enAdopcion != "" %}
+
+            <a class="btn btn-primary" href="/adoptar/{{user.pk}}/{{ob.pk}}">Adoptar</a>
+            {% endif %}
+          {% endif %}
+          </div>
+      </div>
+    </div>
+    </section>
+
+    <input id="controlMap" type="hidden" name="controlMap" value="areasSelect">
+    <input id="centerMap" type="hidden" name="centerMap" value="{{ob.ubicacion}}">
+    <ul id="ul" hidden >
+      {% for i in all%}
+      <li class="todas"><p>{{i.ubicacion}}</p>
+      <p>{{i.pk}}</p>
+      <p>{{i.nombre}}</p></li></li>
+      {% endfor %}
+      <li class="si"><p>{{ob.ubicacion}}</p>
+      <p>{{ob.pk}}</p>
+      <p>{{ob.nombre}}</p></li></li>
+    </ul>
+  </div>
+{% endblock %}

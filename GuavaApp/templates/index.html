@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block title %} Guava {% endblock%}
+{% block content %}
+
+
+    <!-- Intro Header -->
+    <header class="masthead">
+      <div class="intro-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+              <h1 class="brand-heading">Guava</h1>
+                <p class="intro-text">Una plataforma para adoptar áreas verdes.
+                  <br>Crea una cuenta y empieza a apoyar.</p>
+              <a href="#about" class="btn btn-circle js-scroll-trigger">
+                <i class="fa fa-angle-double-down animated"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+<!-- About Section -->
+<section id="about" class="content-section text-center bg-success">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <h2>Sobre Guava</h2>
+        <p>Guava es una plataforma web que busca salvar las áreas verdes de tu ciudad.</p>
+        <p>Guava esta conciente de estado actual de muchas parques y otras áreas verdes de diferentes ciudadades, por eso nos dimos a la tarea de crear una plataforma para salvarlas.</p>
+        <p>Facilitamos la conexion entre dueños de áreas y ciudadanos que quieran aportar arboles para la reforestacion de estas áreas verdes.</p>
+        <p></p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Icons Grid -->
+<section id="icons" class="content-section features-icons ffff bg-light text-center">
+  <div class="container">
+    <h2>Empieza a apoyar</h2>
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+          <div class="features-icons-icon d-flex">
+            <i class="fa fa-users m-auto"></i>
+          </div>
+          <h3>Crea una cuenta</h3>
+          <p class="lead mb-0">Crea una cuenta para empezar a apoyar.</p>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+          <div class="features-icons-icon d-flex">
+            <i class="fa fa-leaf m-auto"></i>
+          </div>
+          <h3>Crea tus áreas verdes</h3>
+          <p class="lead mb-0">Da de alta zonas de tu propiedad para que la comunidad te apoye a ti.</p>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+          <div class="features-icons-icon d-flex">
+            <i class="fa fa-map m-auto"></i>
+          </div>
+          <h3>Navega por las zonas de tu ciudad</h3>
+          <p class="lead mb-0">Utiliza nuestro mapa para descubrir areas cercas de ti.</p>
+        </div>
+      </div>
+    </div>
+    <p></p>
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+          <div class="features-icons-icon d-flex">
+            <i class="fa fa-plus m-auto"></i>
+          </div>
+          <h3>Adopta</h3>
+          <p class="lead mb-0">Haste cargo de zonas en adopcion.</p>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+          <div class="features-icons-icon d-flex">
+            <i class="fa fa-tree m-auto"></i>
+          </div>
+          <h3>Aporta y has peticiones</h3>
+          <p class="lead mb-0">Aporta o pide aportacines a la comunidad.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div>
+
+
+<section >
+  <div id="map">
+  </div>
+</div>
+
+<input id="controlMap" type="hidden" name="controlMap" value="index">
+<ul id="ul" hidden >
+  {% for i in ob%}
+  <li class="todas"><p>{{i.ubicacion}}</p>
+  <p>{{i.pk}}</p>
+  <p>{{i.nombre}}</p></li></li>
+  {% endfor %}
+  {% for i in se%}
+  <li class="si"><p>{{i.ubicacion}}</p>
+  <p>{{i.pk}}</p>
+  <p>{{i.nombre}}</p></li></li>
+  {% endfor %}
+</ul>
+</div>
+{% endblock %}

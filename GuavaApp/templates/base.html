@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <link rel="stylesheet" type="text/css"  href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" type="text/css"  href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" type="text/css"  href="{% static 'css/font-awesome.css' %}">
+  <title>{% block title %}{{title}}{% endblock %}</title>
+</head>
+<body>
+
+  <div class="modal fade" id="meModal" tabindex="-1" role="dialog">
+     <div class="modal-dialog" role="document">
+       <div class="modal-content">
+
+       </div>
+     </div>
+   </div><!-- /.modal -->
+   <div class="modal fade" id="newModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+        </div>
+      </div>
+    </div><!-- /.modal -->
+
+
+    {% if messages %}
+        <ul class="messages" id="messa" >
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+  <nav class="ccsNav navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="/">
+          <img id="color" src="{% static 'img/sprout.png' %}" width="32" height="32" alt="">
+        Guava</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+
+            {% if otro == "no" %}
+            <li id="hh" hidden>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#about">Conocenos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#icons">Empezar</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#map">Mapa</a>
+            </li>
+                  {% if user.is_authenticated %}
+
+                  <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="/areas">Areas</a>
+                  </li>
+                    <li class="nav-item">
+                      <div class="dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          {{user}}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="nav-link js-scroll-trigger" href="/perfil/{{user.pk}}">Perfil</a>
+                        <a class="nav-link js-scroll-trigger" href="/logout">Cerrar Sesion</a>
+                        </div>
+                      </div>
+                    </li>
+                  {% else %}
+                  <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="/areas">Areas</a>
+                  </li>
+                  <li class="nav-item">
+                    <a id="log" class="nav-link" href="login" data-toggle="modal" data-target="#meModal">Acceder</a>
+                  </li>
+                  <li class="nav-item">
+                    <a id="regis" class="nav-link" href="register" data-toggle="modal" data-target="#meModal">Registrar</a>
+                  </li>
+                  {% endif %}
+             {% else %}
+             <li class="nav-item">
+               <a class="nav-link js-scroll-trigger" href="/areas">Areas</a>
+             </li>
+            {% if user and not user.is_anonymous %}
+             <li class="nav-item">
+               <a class="nav-link js-scroll-trigger" href="/perfil/{{user.pk}}">Perfil </a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link js-scroll-trigger" href="/logout">Cerrar Sesion</a>
+             </li>
+             {% endif %}
+        {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+<!--
+  <footer class="footer fixed-bottom bg-light">
+      <div class="container">
+        <div class="text-muted">Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+      </div><div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+      <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+  </footer>
+-->
+
+<!-- Footer -->
+<footer class="footer bg-success">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+        <p class="small mb-4 mb-lg-0">&copy; Guava 2017. All Lefts Reserved.</p>
+      </div>
+      <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
+        <ul class="list-inline mb-0">
+          <li class="list-inline-item mr-3">
+            <a href="#">
+              <i class="fa fa-facebook fa-2x fa-fw"></i>
+            </a>
+          </li>
+          <li class="list-inline-item mr-3">
+            <a href="#">
+              <i class="fa fa-twitter fa-2x fa-fw"></i>
+            </a>
+          </li>
+          <li class="list-inline-item">
+            <a href="#">
+              <i class="fa fa-instagram fa-2x fa-fw"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  <script type="text/javascript" src="{% static 'js/jquery-3.1.1.js' %}">
+  </script>
+  <script type="text/javascript" src="{% static 'js/jquery.easing.min.js' %}">
+  </script>
+  <script type="text/javascript" src="{% static 'js/popper.min.js' %}">
+  </script>
+  <script type="text/javascript" src="{% static 'js/bootstrap.js' %}">
+  </script>
+  <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByQ4WO7Y8lNWbNjWtmJPXi_MuHeYXcA4U&callback=initMap"
+  type="text/javascript"></script>
+
+  <script type="text/javascript" src="{% static 'js/map.js' %}">
+  </script>
+  <script type="text/javascript" src="{% static 'js/javascript.js' %}">
+  </script>
+</body>
+</html>

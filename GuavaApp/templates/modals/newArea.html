@@ -1,0 +1,47 @@
+
+
+<div class="modal-header bg-success">
+  <h4 class="modal-title center" id="exampleModalLabel">{{user}}</h4>
+</div>
+<div class="modal-body">
+  {% if errors %}
+     <div class="alert alert-danger">
+         <strong>{{ errors }}</strong>
+     </div>
+{% endif %}
+  <input id="controlMap" type="hidden" name="controlMap" value="newArea">
+  <ul id="ul" hidden >
+    <li class="todas">32.4966818, -117.0878919</li>
+    <li class="si">32.487176024732776, -117.09546089172363</li>
+    <li class="adopcion">32.49267819482123, -117.06559181213379</li>
+    <li class="peticion">32.485148824619195, -117.0824146270752</li>
+  </ul>
+  <div id="map1"></div>
+
+
+  <form  class=" col-lg-12 col-md-10  mx-auto " method="post" action="{% url  'NewArea_view' user.pk  %}"  enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+        <div>
+            <input type="text" id="nombre" name="nombre" class="form-control"  placeholder="Nombre" autofocus>
+        </div>
+    </div>
+    <div class="form-group">
+        <div>
+            <input type="text" id="ubicacion" name="ubicacion" class="form-control"  placeholder="ubicacion" hidden>
+        </div>
+    </div>
+    <div class="form-group">
+        <div>
+            <input type="text" id="direccion" name="direccion" class="form-control"  placeholder="direccion" autofocus>
+        </div>
+    </div>
+          <div  class="col-6">
+            <button class="btn btn-md btn-primary btn-block" type="submit" value="Registro">Guardar</button>
+            <input type="hidden" name="next" value="{{user.pk}}" />
+          </div>
+  </form>
+  </div>
+<div class="modal-footer bg-success">
+  <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+</div>

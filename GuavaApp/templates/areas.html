@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block title %} Guava {% endblock%}
+{% block content %}
+
+
+  <!-- About Section -->
+  <section id="about" class="content-section text-center bg-light">
+    <div id="fh5co-contact">
+      <div class="container">
+
+          <div id="map">
+
+          </div>
+          <div class="desc">
+            <ul class="markers">
+              <li><img src="{%static '/img/marker.svg'%}" width="50" height="50"></i> Todas</li>
+              <li><img src="{%static '/img/marker6.svg'%}" width="50" height="50">Tus areas </li>
+              <li><img src="{%static '/img/marker2.svg'%}" width="50" height="50"> En Adopcion</li>
+              <li><img src="{%static '/img/marker3.svg'%}" width="50" height="50">Con peticiones</li>
+            </ul>
+          </div>
+      </div>
+    </div>
+    </section>
+
+
+    <input id="controlMap" type="hidden" name="controlMap" value="areas">
+    <ul id="ul" hidden >
+      {% for i in ob%}
+      <li class="todas"><p>{{i.ubicacion}}</p>
+      <p>{{i.pk}}</p>
+      <p>{{i.nombre}}</p></li></li>
+      {% endfor %}
+      {% for i in se%}
+      <li class="si"><p>{{i.ubicacion}}</p>
+      <p>{{i.pk}}</p>
+      <p>{{i.nombre}}</p></li></li>
+      {% endfor %}
+      {% for i in ad%}
+      <li class="adopcion"><p>{{i.ubicacion}}</p>
+      <p>{{i.pk}}</p>
+      <p>{{i.nombre}}</p></li></li>
+      {% endfor %}
+      {% for i in pt%}
+      <li class="peticion"><p>{{i.ubicacion}}</p>
+      <p>{{i.pk}}</p>
+      <p>{{i.nombre}}</p></li></li>
+      {% endfor %}
+    </ul>
+
+  </div>
+{% endblock %}

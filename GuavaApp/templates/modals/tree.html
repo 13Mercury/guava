@@ -1,0 +1,31 @@
+
+
+<div class="modal-header bg-success">
+  <h4 class="modal-title center" id="exampleModalLabel">{{user}}</h4>
+</div>
+<div class="modal-body">
+  {% if errors %}
+  {% for key, values in errors.items %}
+     {% for e in values %}
+     <div class="alert alert-danger">
+         <strong>{{ e }}</strong>
+     </div>
+     {% endfor %}
+ {% endfor %}
+{% endif %}
+  <form  class=" col-lg-12 col-md-10  mx-auto " method="post" action="{% url  'Arboles_view' user.pk  %}"  enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+        <div>
+            <input type="number" min="0" id="arboles" name="arboles" class="form-control"  value={{cc.arboles}} autofocus>
+        </div>
+    </div>
+          <div  class="col-6">
+            <button class="btn btn-md btn-primary btn-block" type="submit" value="Registro">Guardar</button>
+            <input type="hidden" name="next" value="{{user.pk}}" />
+          </div>
+  </form>
+  </div>
+<div class="modal-footer bg-success">
+  <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+</div>
